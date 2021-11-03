@@ -1,0 +1,1 @@
+const myToken = config.TOKEN
