@@ -39,7 +39,7 @@
 
 <h2 class="my-4 text-center">Add A New Product</h2>
 
-<form onsubmit="addProductToServer()">
+<form onsubmit="addProductToServer(event)">
     <div class="form-group">
       <label for="name">Product Name</label>
       <input type="text" class="form-control" id="name" placeholder="Name">
@@ -54,7 +54,7 @@
     </div>
     <div class="form-group">
         <label for="image">Product Image</label>
-        <input type="text" class="form-control" id="image" placeholder="Image Link">
+        <input type="text" class="form-control" id="image" placeholder="Image Link - https://source.unsplash.com/random/800x600">
     </div>
     <div class="form-group">
         <label for="price">Price</label>
