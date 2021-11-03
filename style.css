@@ -1,4 +1,8 @@
 .product-image {
-  height: 300px;
+  min-height: 300px;
   object-fit: cover;
+}
+
+a:hover {
+  text-decoration: none;
 }

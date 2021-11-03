@@ -14,19 +14,20 @@ const loadData = async () => {
 const displayData = async body => {
     console.log(body)
     const productContainer = document.querySelector('.product-container')
-    productContainer.innerHTML = body.map(({name, imageUrl: image, description, price, brand, id}) => `
+    productContainer.innerHTML = body.map(({name, imageUrl: image, description, price, brand, _id: id}) => `
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="card">
-            <a class="text-dark" href="product-details.html?productId=${id}">
-                <img src=${image} class="card-img-top product-image" alt="Image Of ${name}"
+        <a class="text-dark" href="product-details.html?productId=${id}">
+            <div class="card">
+                <img src=${image} class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">${name}</h5>
-                    <p class="card-text">${description}</p>
-                    <p class="card-text">${brand}</p>
-                    <p class="card-text">${price}</p>
+                    <div class="d-flex justify-content-between">
+                        <h5 class="card-title">${name}</h5>
+                        <p class="card-text">£${price}</p>
+                    </div>
+                    <p class="card-text">${brand} - ${description}</p>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
     `).join('')
 }

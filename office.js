@@ -11,7 +11,7 @@ const addProductToServer = async e => {
         price: document.querySelector('#price').value,
     }
 
-    const response = await fetch('https://striveschool-api.herokuapp.com/api/product/', {
+    const response = await fetch('https://striveschool-api.herokuapp.com/api/product', {
         method: "POST",
         body: JSON.stringify(productInfo),
         headers: {
