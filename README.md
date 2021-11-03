@@ -1,3 +1,9 @@
+YOU WILL NEED TO USE YOUR OWN TOKEN AND CREATE A config.js FILE WITH THE FOLLOWING TO USE THE WEBSITE:
+
+const config = {
+TOKEN: 'YOUR_TOKEN_GOES_HERE'
+}
+
 🛍️Strivazon
 You are building the frontend for an online shopping business. In particular, you are responsible for the back-office, where admins can add and edit products.
 
