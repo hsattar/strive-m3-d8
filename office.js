@@ -14,18 +14,22 @@ createEdit.addEventListener('click', () => {
 })
 
 const getProductDetails = async () => {
-    const response = await fetch(url, {
-        headers: {
-            "Authorization": myToken
-        }
-    })
-    const body = await response.json()
-    const {name, description, brand, imageUrl : image, price} = body
-    document.querySelector('#name').value = name
-    document.querySelector('#description').value = description
-    document.querySelector('#brand').value = brand
-    document.querySelector('#image').value = image
-    document.querySelector('#price').value = price
+    try {
+        const response = await fetch(url, {
+            headers: {
+                "Authorization": myToken
+            }
+        })
+        const body = await response.json()
+        const {name, description, brand, imageUrl : image, price} = body
+        document.querySelector('#name').value = name
+        document.querySelector('#description').value = description
+        document.querySelector('#brand').value = brand
+        document.querySelector('#image').value = image
+        document.querySelector('#price').value = price
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 if (productId) {
@@ -39,48 +43,64 @@ if (productId) {
 } 
 
 const deleteProduct = async () => {
-    const response = await fetch(url, {
-        method: "DELETE", 
-        headers: {
-            "Authorization": myToken
+    try {
+        const response = await fetch(url, {
+            method: "DELETE", 
+            headers: {
+                "Authorization": myToken
+            }
+        })
+        if (response.ok) {
+            const alertMsg = document.querySelector('.alertMsg')
+            alertMsg.className = 'alert alert-success'
+            alertMsg.innerHTML = `
+            <p class="text-center mb-2">You Succesfully Deleted The Product. You Will Return Home In 3 Seconds.<p>
+            <div class="d-flex justify-content-center">
+                <a href="/" class="mx-2">Return Home Now</a>
+            </div>`
+            setTimeout(() => {window.location.href = '/'}, 3000)
         }
-    })
-    if (response.ok) {
-        alert('Deleted')
-        window.location.href = '/'
+    } catch (error) {
+        console.error(error)
     }
 }
 
 const addProductToServer = async () => {
-    const productInfo = {
-        name: document.querySelector('#name').value,  
-        description: document.querySelector('#description').value,
-        brand: document.querySelector('#brand').value,
-        imageUrl: document.querySelector('#image').value,
-        price: document.querySelector('#price').value,
-    }
-
-    const response = await fetch(url, {
-        method: productId ? "PUT" : "POST",
-        body: JSON.stringify(productInfo),
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": myToken
+    try {
+        const productInfo = {
+            name: document.querySelector('#name').value,  
+            description: document.querySelector('#description').value,
+            brand: document.querySelector('#brand').value,
+            imageUrl: document.querySelector('#image').value,
+            price: document.querySelector('#price').value,
         }
-    })
 
-    if (response.ok) {
-        const newProduct = await response.json()
-        const alertUser = (message) => {
-            const alertMsg = document.querySelector('.alertMsg')
-            alertMsg.className = 'alert alert-success'
-            alertMsg.innerHTML = `
-            <p class="text-center mb-2">${message} ${newProduct.name}<p>
-            <div class="d-flex justify-content-center">
-                <a href="/" class="mx-2">Return Home</a>
-                <a href="./product-details.html?productId=${productId}" class="mx-2">View Product</a>
-            </div>`
+        const response = await fetch(url, {
+            method: productId ? "PUT" : "POST",
+            body: JSON.stringify(productInfo),
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": myToken
+            }
+        })
+
+        if (response.ok) {
+            const newProduct = await response.json()
+            const alertUser = (message, viewProduct) => {
+                const alertMsg = document.querySelector('.alertMsg')
+                alertMsg.className = 'alert alert-success'
+                alertMsg.innerHTML = `
+                <p class="text-center mb-2">${message} ${newProduct.name}<p>
+                <div class="d-flex justify-content-center">
+                    <a href="/" class="mx-2">Return Home</a>
+                    <a href="./product-details.html?productId=${viewProduct}" class="mx-2">View Product</a>
+                </div>`
+                if (!productId) form.reset()
+            }
+            productId ? alertUser('Succesfully Edited The Product Called', productId) 
+            : alertUser('Succesfully Created A New Product Called', newProduct._id)
         }
-        productId ? alertUser('Succesfully Edited The product Called') : alertUser('Succesfully Created A New Product Called')
+    } catch (error) {
+        console.error(error)
     }
 }
