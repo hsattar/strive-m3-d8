@@ -4,7 +4,13 @@ const url = productId ? `https://striveschool-api.herokuapp.com/api/product/${pr
 
 const form = document.querySelector('form')
 form.addEventListener('submit', e => {
-    addProductToServer(e)
+    e.preventDefault()
+    addProductToServer()
+})
+
+const createEdit = document.querySelector('.create-edit')
+createEdit.addEventListener('click', () => {
+    form.classList.add('submitted')
 })
 
 const getProductDetails = async () => {
@@ -26,8 +32,7 @@ if (productId) {
     getProductDetails()
     const pageHeading = document.querySelector('.page-heading')
     pageHeading.innerText = 'Edit The Product'
-    const createEdit = document.querySelector('.create-edit')
-    createEdit.innerText = 'Edit'
+    createEdit.innerText = 'Save'
     const deletionArea = document.querySelector('.deletion')
     deletionArea.innerHTML = `
     <button type="button" class="btn btn-danger" onclick=deleteProduct()><i class="bi bi-trash"></i></button>`
@@ -46,9 +51,7 @@ const deleteProduct = async () => {
     }
 }
 
-const addProductToServer = async e => {
-    e.preventDefault()
-
+const addProductToServer = async () => {
     const productInfo = {
         name: document.querySelector('#name').value,  
         description: document.querySelector('#description').value,
@@ -72,9 +75,11 @@ const addProductToServer = async e => {
             const alertMsg = document.querySelector('.alertMsg')
             alertMsg.className = 'alert alert-success'
             alertMsg.innerHTML = `
-            <p>${message} ${newProduct.name}<p>
-            <a href="/">Return Home</a>`
-            form.reset()
+            <p class="text-center mb-2">${message} ${newProduct.name}<p>
+            <div class="d-flex justify-content-center">
+                <a href="/" class="mx-2">Return Home</a>
+                <a href="./product-details.html?productId=${productId}" class="mx-2">View Product</a>
+            </div>`
         }
         productId ? alertUser('Succesfully Edited The product Called') : alertUser('Succesfully Created A New Product Called')
     }

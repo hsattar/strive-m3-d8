@@ -12,3 +12,8 @@ a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.submitted input:invalid,
+.submitted textarea:invalid {
+  border: red;
+}
