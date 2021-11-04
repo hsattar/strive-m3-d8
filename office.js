@@ -24,10 +24,26 @@ const getProductDetails = async () => {
 
 if (productId) {
     getProductDetails()
+    const pageHeading = document.querySelector('.page-heading')
+    pageHeading.innerText = 'Edit The Product'
     const createEdit = document.querySelector('.create-edit')
     createEdit.innerText = 'Edit'
-} else {
-    
+    const deletionArea = document.querySelector('.deletion')
+    deletionArea.innerHTML = `
+    <button type="button" class="btn btn-danger" onclick=deleteProduct()><i class="bi bi-trash"></i></button>`
+} 
+
+const deleteProduct = async () => {
+    const response = await fetch(url, {
+        method: "DELETE", 
+        headers: {
+            "Authorization": myToken
+        }
+    })
+    if (response.ok) {
+        alert('Deleted')
+        window.location.href = '/'
+    }
 }
 
 const addProductToServer = async e => {

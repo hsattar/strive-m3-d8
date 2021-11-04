@@ -37,7 +37,7 @@
 
 <div class="container">
 
-<h2 class="my-4 text-center">Add A New Product</h2>
+<h2 class="my-4 text-center page-heading">Add A New Product</h2>
 
 <div class="alert alertMsg d-none text-center" role="alert"></div>
 
@@ -62,8 +62,15 @@
         <label for="price">Price</label>
         <input type="number" class="form-control" id="price" placeholder="£10" required>
     </div>
-    <button class="btn btn-success create-edit">Create</button>
-    <button type="reset" class="btn btn-warning ml-auto">Clear</button>
+    <div class="d-flex justify-content-between btn-area">
+        <div class="creation">
+            <button class="btn btn-success create-edit">Create</button>
+            <button type="reset" class="btn btn-warning ml-auto">Clear</button>
+        </div>
+        <div class="deletion">
+
+        </div>
+    </div>
 </form>
 
 </div>
