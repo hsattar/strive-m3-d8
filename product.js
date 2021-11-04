@@ -32,7 +32,7 @@ const displayProduct = ({name, brand, description, imageUrl: image, price, _id: 
                 <p>£${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
             </div>
             <div class="col-12 text-center">
-                <button class="btn btn-outline-success w-100">Add To Cart</button>
+                <a class="btn btn-outline-success w-100" href="./back-office.html?productId=${id}">Edit Product</a>
             </div>
         </div>
     </div>`
