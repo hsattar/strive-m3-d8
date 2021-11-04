@@ -29,14 +29,13 @@ const displayProduct = ({name, brand, description, imageUrl: image, price, _id: 
                 <p>${description}</p>
             </div>
             <div class="col-12 text-center">
-                <p>£${price}</p>
+                <p>£${price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
             </div>
             <div class="col-12 text-center">
                 <button class="btn btn-outline-success w-100">Add To Cart</button>
             </div>
         </div>
-    </div>
-    `
+    </div>`
 }
 
 fetchProduct()
