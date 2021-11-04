@@ -4,6 +4,8 @@ const config = {
 TOKEN: 'YOUR_TOKEN_GOES_HERE'
 }
 
+---
+
 🛍️Strivazon
 You are building the frontend for an online shopping business. In particular, you are responsible for the back-office, where admins can add and edit products.
 
@@ -35,6 +37,15 @@ POST https://striveschool-api.herokuapp.com/api/account/login
 🎯GOALS:
 A back-office page, where you can insert the product by specifying the parameters
 A front page, where the user can see the available products
+On the back-office page:
+Add a button and the functionality to edit a single product (use PUT on /product/product_id)
+Add a button and the functionality to delete a single product (use DELETE on /product/product_id)
+Add validation to the product creation/edit form
+Display an error message if something goes wrong (use bootstrap's components)
+On the front page:
+Add a loader while waiting for the products to load
+Add a link to each item to go to the detail page
+Create the detail page! You can use GET on /product/product_id
 
 🔴PROBLEM SOLVING CENTER / FAQ:
 Learning how to read errors is very important! ✨
