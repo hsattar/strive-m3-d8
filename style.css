@@ -16,5 +16,5 @@ a:hover {
 
 .submitted input:invalid,
 .submitted textarea:invalid {
-  border: red;
+  border: 1px solid red;
 }
